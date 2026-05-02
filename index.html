@@ -3,30 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>My diary</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <header>
-    My diary
-  </header>
+<header>My diary</header>
 
-  <div class="card">
-    <h2>Bienvenidos</h2>
-    <p>2026</p>
+<div class="container">
+
+  <div class="controls">
+    <button onclick="addTitle()">Título</button>
+    <button onclick="addText()">Texto</button>
+    <button onclick="addImage()">Imagen</button>
+    <button onclick="addQuote()">Frase</button>
+    <button onclick="savePage()">Guardar</button>
   </div>
 
-  <div class="card">
-    <h2>Entradas</h2>
-    <p>Acá podremos subir textos, fotos, videos y más.</p>
-  </div>
+  <div id="page" class="page"></div>
 
-  <footer>
-    hecho para recordar
-  </footer>
+</div>
 
+<footer>hecho para recordar</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
