@@ -73,31 +73,41 @@ function addQuote() {
 
 // 💾 GUARDAR
 function saveMagazine() {
+let pages = [];
+let currentPage = "";
 
-  const date = document.getElementById("date")?.value || "";
-  const time = document.getElementById("time")?.value || "";
+blocks.forEach((block, index) => {
+  const input = block.querySelector("input, textarea");
 
-  const blocks = document.querySelectorAll(".block");
+  let content = "";
 
-  let pages = [];
+  if (input) {
+    let text = input.value;
 
-  blocks.forEach(block => {
-    const input = block.querySelector("input, textarea");
-
-    if (input) {
-      let text = input.value;
-
-      if (block.classList.contains("quote")) {
-        pages.push(`<p>"${text}"</p>`);
-      } else if (input.tagName === "INPUT") {
-        pages.push(`<h1>${text}</h1>`);
-      } else {
-        pages.push(`<p>${text}</p>`);
-      }
+    if (block.classList.contains("quote")) {
+      content = `<p>"${text}"</p>`;
+    } else if (input.tagName === "INPUT") {
+      content = `<h1>${text}</h1>`;
     } else {
-      pages.push(block.innerHTML);
+      content = `<p>${text}</p>`;
     }
-  });
+  } else {
+    content = block.innerHTML;
+  }
+
+  currentPage += content;
+
+  // 👉 cada 2 bloques = nueva página
+  if ((index + 1) % 2 === 0) {
+    pages.push(currentPage);
+    currentPage = "";
+  }
+});
+
+// si queda contenido
+if (currentPage !== "") {
+  pages.push(currentPage);
+}
 
   revistas.push({
     id: Date.now(),
