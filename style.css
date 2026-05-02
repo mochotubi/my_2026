@@ -1,33 +1,74 @@
 body {
   margin: 0;
-  font-family: "Farmstand", sans-serif;
+  font-family: Arial, sans-serif;
   background: #d6ff92;
   color: #214;
-  text-align: center;
 }
 
 header {
   background: #b6df74;
-  padding: 20px;
+  padding: 15px;
   color: white;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
 }
 
-.card {
-  background: white;
-  margin: 20px;
+.container {
+  max-width: 700px;
+  margin: auto;
   padding: 15px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #ff8fb1;
+  color: white;
+  cursor: pointer;
+}
+
+.page {
+  background: white;
   border-radius: 15px;
+  padding: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
+.block {
+  margin-bottom: 15px;
+}
+
+.block input,
+.block textarea {
   width: 100%;
-  background: #b6df74;
-  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.block img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.quote {
+  font-style: italic;
+  background: #fff4c2;
+  padding: 10px;
+  border-left: 5px solid #ffb703;
+}
+
+footer {
+  text-align: center;
   padding: 10px;
   font-size: 14px;
+  color: #555;
 }
