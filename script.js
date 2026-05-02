@@ -172,24 +172,30 @@ function showPage() {
 // 👉 SWIPE (móvil)
 let startX = 0;
 
-viewContent.addEventListener("touchstart", e => {
+// detectar swipe SIEMPRE
+document.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
 });
 
-viewContent.addEventListener("touchend", e => {
+document.addEventListener("touchend", e => {
   let endX = e.changedTouches[0].clientX;
 
-  if (endX < startX - 50 && currentPage < currentPages.length - 1) {
-    currentPage++;
-    showPage();
+  // 👉 siguiente página
+  if (endX < startX - 50) {
+    if (currentPage < currentPages.length - 1) {
+      currentPage++;
+      showPage();
+    }
   }
 
-  if (endX > startX + 50 && currentPage > 0) {
-    currentPage--;
-    showPage();
+  // 👉 página anterior
+  if (endX > startX + 50) {
+    if (currentPage > 0) {
+      currentPage--;
+      showPage();
+    }
   }
 });
-
 // 🚀 INICIO
 goHome();
 
