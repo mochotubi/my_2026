@@ -104,18 +104,11 @@ function saveMagazine() {
 }
 // 📚 LISTA DE REVISTAS
 function renderList() {
-  list.innerHTML = "";
-
-  revistas.forEach(r => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <h2>Revista</h2>
-      <button onclick="openMagazine(${r.id})">Abrir</button>
-    `;
-    list.appendChild(div);
-  });
-}
+div.innerHTML = `
+  <h2>${r.fecha || "Sin fecha"}</h2>
+  <p>${r.hora || ""}</p>
+  <button onclick="openMagazine(${r.id})">Abrir</button>
+`;
 
 // 📖 VER REVISTA
 function openMagazine(id) {
