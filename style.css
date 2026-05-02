@@ -119,3 +119,46 @@ p {
   border-radius: 20px;
   transition: transform 0.4s;
 }
+.home-header,
+.editor-header,
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.main-btn {
+  background: #a9df68;
+  color: #214;
+  padding: 10px 15px;
+  border-radius: 12px;
+}
+
+.save-btn {
+  background: #6fcf97;
+}
+
+.datetime {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.page {
+  background: #fffdf5;
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 300px;
+}
+
+.viewer-book {
+  text-align: center;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
