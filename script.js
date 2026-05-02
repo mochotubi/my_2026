@@ -1,6 +1,71 @@
-document.addEventListener("DOMContentLoaded", () => {
+const home = document.getElementById("home");
+const editor = document.getElementById("editor");
+const viewer = document.getElementById("viewer");
 
-  function savePage() {
+const page = document.getElementById("page");
+const list = document.getElementById("list");
+const viewContent = document.getElementById("viewContent");
+
+let revistas = JSON.parse(localStorage.getItem("revistas")) || [];
+
+// 🧠 CAMBIAR VISTAS
+function goHome() {
+  home.style.display = "block";
+  editor.style.display = "none";
+  viewer.style.display = "none";
+  renderList();
+}
+
+function newMagazine() {
+  page.innerHTML = "";
+  home.style.display = "none";
+  editor.style.display = "block";
+}
+
+// ✍️ BLOQUES
+function addTitle() {
+  const block = document.createElement("div");
+  block.className = "block";
+  block.innerHTML = '<input placeholder="Título">';
+  page.appendChild(block);
+}
+
+function addText() {
+  const block = document.createElement("div");
+  block.className = "block";
+  block.innerHTML = '<textarea placeholder="Texto..."></textarea>';
+  page.appendChild(block);
+}
+
+function addImage() {
+  const block = document.createElement("div");
+  block.className = "block";
+
+  const input = document.createElement("input");
+  input.type = "file";
+
+  input.onchange = function () {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      block.innerHTML = `<img src="${e.target.result}">`;
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+
+  block.appendChild(input);
+  page.appendChild(block);
+}
+
+function addQuote() {
+  const block = document.createElement("div");
+  block.className = "block quote";
+  block.innerHTML = '<textarea placeholder="Frase..."></textarea>';
+  page.appendChild(block);
+}
+
+// 💾 GUARDAR COMO REVISTA
+function saveMagazine() {
+  // convertir inputs en texto bonito
   const blocks = document.querySelectorAll(".block");
 
   blocks.forEach(block => {
@@ -19,22 +84,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  function savePage() {
-  let revistas = JSON.parse(localStorage.getItem("revistas")) || [];
-
-  const nuevaRevista = {
+  revistas.push({
     id: Date.now(),
-    contenido: page.innerHTML,
-    fecha: new Date().toLocaleDateString()
-  };
-
-  revistas.push(nuevaRevista);
+    contenido: page.innerHTML
+  });
 
   localStorage.setItem("revistas", JSON.stringify(revistas));
 
-  alert("Revista guardada 📖");
-
-  window.location.href = "home.html"; // 👈 volver a portadas
+  goHome();
 }
-  alert("Revista guardada ✨");
-  }
+
+// 📚 LISTA DE REVISTAS
+function renderList() {
+  list.innerHTML = "";
+
+  revistas.forEach(r => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <h2>Revista</h2>
+      <button onclick="openMagazine(${r.id})">Abrir</button>
+    `;
+    list.appendChild(div);
+  });
+}
+
+// 📖 VER REVISTA
+function openMagazine(id) {
+  const revista = revistas.find(r => r.id === id);
+
+  viewContent.innerHTML = revista.contenido;
+
+  home.style.display = "none";
+  viewer.style.display = "block";
+}
+
+// iniciar
+goHome();
