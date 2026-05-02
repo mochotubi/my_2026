@@ -65,35 +65,43 @@ function addQuote() {
 
 // 💾 GUARDAR COMO REVISTA
 function saveMagazine() {
-  // convertir inputs en texto bonito
+
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+
   const blocks = document.querySelectorAll(".block");
+
+  let pages = [];
 
   blocks.forEach(block => {
     const input = block.querySelector("input, textarea");
 
     if (input) {
-      const text = input.value;
+      let text = input.value;
 
       if (block.classList.contains("quote")) {
-        block.innerHTML = `<p>"${text}"</p>`;
+        pages.push(`<p>"${text}"</p>`);
       } else if (input.tagName === "INPUT") {
-        block.innerHTML = `<h1>${text}</h1>`;
+        pages.push(`<h1>${text}</h1>`);
       } else {
-        block.innerHTML = `<p>${text}</p>`;
+        pages.push(`<p>${text}</p>`);
       }
+    } else {
+      pages.push(block.innerHTML);
     }
   });
 
   revistas.push({
     id: Date.now(),
-    contenido: page.innerHTML
+    fecha: date,
+    hora: time,
+    pages: pages
   });
 
   localStorage.setItem("revistas", JSON.stringify(revistas));
 
   goHome();
 }
-
 // 📚 LISTA DE REVISTAS
 function renderList() {
   list.innerHTML = "";
