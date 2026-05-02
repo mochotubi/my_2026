@@ -186,3 +186,5 @@ window.addQuote = addQuote;
 window.saveMagazine = saveMagazine;
 window.openMagazine = openMagazine;
 window.goHome = goHome;
+
+localStorage.removeItem("revistas");
