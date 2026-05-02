@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis revistas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>Mis revistas</header>
+
+<div class="container" id="list"></div>
+
+<script>
+const list = document.getElementById("list");
+
+let revistas = JSON.parse(localStorage.getItem("revistas")) || [];
+
+revistas.forEach(r => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `
+    <h2>Revista</h2>
+    <p>${r.fecha}</p>
+    <button onclick="openRev(${r.id})">Abrir</button>
+  `;
+  list.appendChild(div);
+});
+
+function openRev(id) {
+  localStorage.setItem("revistaActual", id);
+  window.location.href = "view.html";
+}
+</script>
+
+</body>
+</html>
