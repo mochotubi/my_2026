@@ -1,4 +1,8 @@
-const home = document.getElementById("home");
+document.addEventListener("DOMContentLoaded", () => {
+
+  // TODO tu código aquí dentro 👇
+
+});const home = document.getElementById("home");
 const editor = document.getElementById("editor");
 const viewer = document.getElementById("viewer");
 
