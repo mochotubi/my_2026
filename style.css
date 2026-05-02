@@ -1,1 +1,33 @@
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background: #d6ff92;
+  color: #333;
+  text-align: center;
+}
 
+header {
+  background: #b6df74;
+  padding: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card {
+  background: white;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ff8fb1;
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+}
