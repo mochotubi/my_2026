@@ -30,7 +30,10 @@ button {
   padding: 10px;
   border: none;
   border-radius: 10px;
-  background: #ff8fb1;
+ button {
+  background: #a9df68;
+  color: #214;
+}
   color: white;
   cursor: pointer;
 }
