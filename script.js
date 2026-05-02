@@ -8,6 +8,10 @@ const viewContent = document.getElementById("viewContent");
 
 let revistas = JSON.parse(localStorage.getItem("revistas")) || [];
 
+// 📚 VARIABLES LIBRO
+let currentPage = 0;
+let currentPages = [];
+
 // 🧠 CAMBIAR VISTAS
 function goHome() {
   home.style.display = "block";
@@ -63,11 +67,11 @@ function addQuote() {
   page.appendChild(block);
 }
 
-// 💾 GUARDAR COMO REVISTA
+// 💾 GUARDAR
 function saveMagazine() {
 
-  const date = document.getElementById("date").value;
-  const time = document.getElementById("time").value;
+  const date = document.getElementById("date")?.value || "";
+  const time = document.getElementById("time")?.value || "";
 
   const blocks = document.querySelectorAll(".block");
 
@@ -102,19 +106,26 @@ function saveMagazine() {
 
   goHome();
 }
-// 📚 LISTA DE REVISTAS
+
+// 📚 LISTA
 function renderList() {
-div.innerHTML = `
-  <h2>${r.fecha || "Sin fecha"}</h2>
-  <p>${r.hora || ""}</p>
-  <button onclick="openMagazine(${r.id})">Abrir</button>
-`;
+  list.innerHTML = "";
+
+  revistas.forEach(r => {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <h2>${r.fecha || "Sin fecha"}</h2>
+      <p>${r.hora || ""}</p>
+      <button onclick="openMagazine(${r.id})">Abrir</button>
+    `;
+
+    list.appendChild(div);
+  });
+}
 
 // 📖 VER REVISTA
-function openMagazine(id) {
-  let currentPage = 0;
-let currentPages = [];
-
 function openMagazine(id) {
   const revista = revistas.find(r => r.id === id);
 
@@ -138,7 +149,7 @@ function showPage() {
   `;
 }
 
-// 👉 deslizar (móvil)
+// 👉 swipe
 let startX = 0;
 
 viewContent.addEventListener("touchstart", e => {
@@ -148,25 +159,21 @@ viewContent.addEventListener("touchstart", e => {
 viewContent.addEventListener("touchend", e => {
   let endX = e.changedTouches[0].clientX;
 
-  if (endX < startX - 50) {
-    // siguiente
-    if (currentPage < currentPages.length - 1) {
-      currentPage++;
-      showPage();
-    }
+  if (endX < startX - 50 && currentPage < currentPages.length - 1) {
+    currentPage++;
+    showPage();
   }
 
-  if (endX > startX + 50) {
-    // anterior
-    if (currentPage > 0) {
-      currentPage--;
-      showPage();
-    }
+  if (endX > startX + 50 && currentPage > 0) {
+    currentPage--;
+    showPage();
   }
 });
-// iniciar
+
+// 🚀 INICIO
 goHome();
 
+// 🔥 CONECTAR BOTONES
 window.newMagazine = newMagazine;
 window.addTitle = addTitle;
 window.addText = addText;
