@@ -3,42 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>My diary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>My diary</header>
+<header>📖 My diary</header>
 
 <div class="container">
 
   <!-- 📚 BIBLIOTECA -->
   <div id="home">
-    <button onclick="newMagazine()">+ Nueva revista</button>
+
+    <div class="home-header">
+      <h2>Mis revistas</h2>
+      <button class="main-btn" onclick="newMagazine()">+ Nueva revista</button>
+    </div>
+
     <div id="list"></div>
   </div>
 
   <!-- ✍️ EDITOR -->
   <div id="editor" style="display:none;">
+
+    <div class="editor-header">
+      <button onclick="goHome()">← Volver</button>
+      <h2>Nueva revista</h2>
+    </div>
+
+    <!-- 📅 Fecha -->
+    <div class="datetime">
+      <input type="date" id="date">
+      <input type="time" id="time">
+    </div>
+
+    <!-- 🎛️ Controles -->
     <div class="controls">
       <button onclick="addTitle()">Título</button>
       <button onclick="addText()">Texto</button>
       <button onclick="addImage()">Imagen</button>
       <button onclick="addQuote()">Frase</button>
-      <button onclick="saveMagazine()">Guardar</button>
+      <button class="save-btn" onclick="saveMagazine()">Guardar</button>
     </div>
-    <div class="datetime">
-  <input type="date" id="date">
-  <input type="time" id="time">
-</div>
 
+    <!-- 📄 Página -->
     <div id="page" class="page"></div>
   </div>
 
   <!-- 📖 VISOR -->
   <div id="viewer" style="display:none;">
-    <button onclick="goHome()">← Volver</button>
-    <div id="viewContent" class="page"></div>
+
+    <div class="viewer-header">
+      <button onclick="goHome()">← Volver</button>
+      <h2>Revista</h2>
+    </div>
+
+    <div id="viewContent" class="page viewer-book"></div>
   </div>
 
 </div>
