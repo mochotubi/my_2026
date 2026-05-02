@@ -1,8 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-  // TODO tu código aquí dentro 👇
-
-});const home = document.getElementById("home");
+// 📦 ELEMENTOS
+const home = document.getElementById("home");
 const editor = document.getElementById("editor");
 const viewer = document.getElementById("viewer");
 
@@ -10,9 +7,10 @@ const page = document.getElementById("page");
 const list = document.getElementById("list");
 const viewContent = document.getElementById("viewContent");
 
+// 📚 DATOS
 let revistas = JSON.parse(localStorage.getItem("revistas")) || [];
 
-// 📚 VARIABLES LIBRO
+// 📖 LIBRO
 let currentPage = 0;
 let currentPages = [];
 
@@ -71,43 +69,48 @@ function addQuote() {
   page.appendChild(block);
 }
 
-// 💾 GUARDAR
+// 💾 GUARDAR REVISTA
 function saveMagazine() {
-let pages = [];
-let currentPage = "";
 
-blocks.forEach((block, index) => {
-  const input = block.querySelector("input, textarea");
+  const date = document.getElementById("date")?.value || "";
+  const time = document.getElementById("time")?.value || "";
 
-  let content = "";
+  const blocks = document.querySelectorAll(".block");
 
-  if (input) {
-    let text = input.value;
+  let pages = [];
+  let currentPageContent = "";
 
-    if (block.classList.contains("quote")) {
-      content = `<p>"${text}"</p>`;
-    } else if (input.tagName === "INPUT") {
-      content = `<h1>${text}</h1>`;
+  blocks.forEach((block, index) => {
+    const input = block.querySelector("input, textarea");
+
+    let content = "";
+
+    if (input) {
+      let text = input.value;
+
+      if (block.classList.contains("quote")) {
+        content = `<p>"${text}"</p>`;
+      } else if (input.tagName === "INPUT") {
+        content = `<h1>${text}</h1>`;
+      } else {
+        content = `<p>${text}</p>`;
+      }
     } else {
-      content = `<p>${text}</p>`;
+      content = block.innerHTML;
     }
-  } else {
-    content = block.innerHTML;
+
+    currentPageContent += content;
+
+    // 👉 cada 2 bloques = 1 página
+    if ((index + 1) % 2 === 0) {
+      pages.push(currentPageContent);
+      currentPageContent = "";
+    }
+  });
+
+  if (currentPageContent !== "") {
+    pages.push(currentPageContent);
   }
-
-  currentPage += content;
-
-  // 👉 cada 2 bloques = nueva página
-  if ((index + 1) % 2 === 0) {
-    pages.push(currentPage);
-    currentPage = "";
-  }
-});
-
-// si queda contenido
-if (currentPage !== "") {
-  pages.push(currentPage);
-}
 
   revistas.push({
     id: Date.now(),
@@ -121,7 +124,7 @@ if (currentPage !== "") {
   goHome();
 }
 
-// 📚 LISTA
+// 📚 MOSTRAR REVISTAS
 function renderList() {
   list.innerHTML = "";
 
@@ -139,9 +142,11 @@ function renderList() {
   });
 }
 
-// 📖 VER REVISTA
+// 📖 ABRIR REVISTA
 function openMagazine(id) {
   const revista = revistas.find(r => r.id === id);
+
+  if (!revista) return;
 
   currentPages = revista.pages;
   currentPage = 0;
@@ -152,6 +157,7 @@ function openMagazine(id) {
   viewer.style.display = "block";
 }
 
+// 📄 MOSTRAR PÁGINA
 function showPage() {
   viewContent.innerHTML = `
     <div class="book-page">
@@ -163,7 +169,7 @@ function showPage() {
   `;
 }
 
-// 👉 swipe
+// 👉 SWIPE (móvil)
 let startX = 0;
 
 viewContent.addEventListener("touchstart", e => {
@@ -187,7 +193,7 @@ viewContent.addEventListener("touchend", e => {
 // 🚀 INICIO
 goHome();
 
-// 🔥 CONECTAR BOTONES
+// 🔗 CONECTAR BOTONES HTML
 window.newMagazine = newMagazine;
 window.addTitle = addTitle;
 window.addText = addText;
@@ -196,5 +202,3 @@ window.addQuote = addQuote;
 window.saveMagazine = saveMagazine;
 window.openMagazine = openMagazine;
 window.goHome = goHome;
-
-
