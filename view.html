@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Revista</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="page" id="viewer"></div>
+</div>
+
+<script>
+const viewer = document.getElementById("viewer");
+
+let revistas = JSON.parse(localStorage.getItem("revistas")) || [];
+let id = localStorage.getItem("revistaActual");
+
+let revista = revistas.find(r => r.id == id);
+
+if (revista) {
+  viewer.innerHTML = revista.contenido;
+}
+</script>
+
+</body>
+</html>
