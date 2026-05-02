@@ -112,14 +112,58 @@ div.innerHTML = `
 
 // 📖 VER REVISTA
 function openMagazine(id) {
+  let currentPage = 0;
+let currentPages = [];
+
+function openMagazine(id) {
   const revista = revistas.find(r => r.id === id);
 
-  viewContent.innerHTML = revista.contenido;
+  currentPages = revista.pages;
+  currentPage = 0;
+
+  showPage();
 
   home.style.display = "none";
   viewer.style.display = "block";
 }
 
+function showPage() {
+  viewContent.innerHTML = `
+    <div class="book-page">
+      ${currentPages[currentPage] || ""}
+      <p style="text-align:center; margin-top:20px;">
+        Página ${currentPage + 1} / ${currentPages.length}
+      </p>
+    </div>
+  `;
+}
+
+// 👉 deslizar (móvil)
+let startX = 0;
+
+viewContent.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+viewContent.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+
+  if (endX < startX - 50) {
+    // siguiente
+    if (currentPage < currentPages.length - 1) {
+      currentPage++;
+      showPage();
+    }
+  }
+
+  if (endX > startX + 50) {
+    // anterior
+    if (currentPage > 0) {
+      currentPage--;
+      showPage();
+    }
+  }
+});
 // iniciar
 goHome();
 
