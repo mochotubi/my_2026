@@ -1,14 +1,19 @@
 {
-  "name": "My diary",
-  "short_name": "2026",
-  "start_url": "index.html",
+  "name": "my diary",
+  "short_name": "diary",
+  "start_url": "/my_2026/",
   "display": "standalone",
-  "background_color": "#d6ff92",
-  "theme_color": "#c6ef83",
+  "background_color": "#ffffff",
+  "theme_color": "#ff8fb1",
   "icons": [
     {
       "src": "icon.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
