@@ -121,3 +121,12 @@ function openMagazine(id) {
 
 // iniciar
 goHome();
+
+window.newMagazine = newMagazine;
+window.addTitle = addTitle;
+window.addText = addText;
+window.addImage = addImage;
+window.addQuote = addQuote;
+window.saveMagazine = saveMagazine;
+window.openMagazine = openMagazine;
+window.goHome = goHome;
